@@ -2,7 +2,7 @@
 """
 Created on Fri Apr 10 13:15:35 2020
 
-@author: Administrator
+@author: Plante Matthieu
 """
 
 import tensorflow as tf
@@ -120,13 +120,9 @@ new_model = tf.keras.models.load_model('reco_nombre_simple_model.h5')
 new_model.summary()
 
 
-
-
 """
 #Webcam
 """
-
-
 cam = cv2.VideoCapture(0)
 
 
