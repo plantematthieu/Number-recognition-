@@ -148,16 +148,16 @@ cam.release()
 
 cv2.destroyAllWindows()
 
-#Lit la photo
+#Read the file
 img = np.array(cv2.imread(img_name))
 
 rgb_weights = [0.2989, 0.5870, 0.1140]
 
-#Transforme la photo en noir et blanc et le reformate
+#Transform to greyscale and normaize
 img_grey = np.dot(img[...,:3], rgb_weights)
 img_grey = cv2.resize(img_grey, (28, 28))
 
-#Traitement de l'image en noir et blanc pour faire ressortir le chiffre écrit au maximum
+#Preprocess on the image 
 for i in range (4):
     for j in range (28):
         img_grey[i][j] = 0
@@ -174,17 +174,15 @@ for i in range (4, 24):
             img_grey[i][j] += 50
 
 
-#Afficher l'image
+#Display
 plt.imshow(img_grey, cmap = "gray")
 
 
 img_flatten = np.array([img_grey]).reshape(28, 28, 1)/255
 
-#Calcule les prédictions du modèle
+#Predictions
 pred = new_model.predict(np.array([img_flatten]))
 
-
-#Renvoie le chiffre lu par l'IA
 maxim = pred[0][0]
 maxim1 = 0
 
@@ -193,4 +191,4 @@ for i in range (1, 10):
         maxim = pred[0][i]
         maxim1 = i
         
-print("Le nombre prédit est : {} avec une probabilité de : {}%".format(maxim1, round(maxim*100, 2)))
+print("The predicted number is: {} w/ a probability of: {}%".format(maxim1, round(maxim*100, 2)))
